@@ -10,11 +10,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: BlocProvider(
-        create: (context) => MissionBloc()..add(const MissionAppStartEvent()),
-        child: const MissionScreen(),
-      ),
+    return const MaterialApp(
+      home: MissionScreen(),
     );
   }
 }

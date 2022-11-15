@@ -51,12 +51,12 @@ class MissionBloc extends Bloc<MissionEvent, MissionState> {
       launches = data.map((e) {
         final dateUtc = DateTime.parse(e['date_utc']);
         final date = dateFormatter.format(dateUtc);
-
         return RocketLaunch(
           name: e['name'],
           imageUrl: e['links']['patch']['large'],
           flightNumber: e['flight_number'] ?? Null,
           date: date,
+          rocketId: e['rocket'],
         );
       }).toList();
 
@@ -66,8 +66,7 @@ class MissionBloc extends Bloc<MissionEvent, MissionState> {
       if (kDebugMode) print(e);
 
       // Error State
-      emit(const MissionErrorFetchDataState(
-          errorMessage: 'DATA DOWNLOAD FAILED'));
+      emit(const MissionErrorFetchDataState());
     }
   }
 }

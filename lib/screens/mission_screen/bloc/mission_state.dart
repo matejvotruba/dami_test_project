@@ -2,27 +2,34 @@ part of 'mission_bloc.dart';
 
 abstract class MissionState extends Equatable {
   const MissionState();
+}
+
+class MissionInitialState extends MissionState {
+  const MissionInitialState();
 
   @override
   List<Object> get props => [];
 }
 
-class MissionInitialState extends MissionState {
-  const MissionInitialState();
-}
-
 class MissionLoadingState extends MissionState {
   const MissionLoadingState();
+
+  @override
+  List<Object> get props => [];
 }
 
 class MissionErrorFetchDataState extends MissionState {
-  const MissionErrorFetchDataState({required this.errorMessage});
+  const MissionErrorFetchDataState();
 
-  final String errorMessage;
+  @override
+  List<Object> get props => [];
 }
 
 class MissionSuccessFetchDataState extends MissionState {
   const MissionSuccessFetchDataState({required this.launches});
 
   final List<RocketLaunch> launches;
+
+  @override
+  List<Object> get props => [launches];
 }

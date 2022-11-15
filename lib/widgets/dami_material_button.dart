@@ -15,7 +15,7 @@ class DamiMaterialButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 46,
-      width: 327,
+      width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
         color: FigmaColors.damiGrass,
