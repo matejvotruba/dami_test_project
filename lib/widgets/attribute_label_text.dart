@@ -20,13 +20,13 @@ class AttributeLabelText extends StatelessWidget {
           color: FigmaColors.lightBlue,
           fontWeight: FontWeight.w700,
         ),
-        children: [
+        children: <TextSpan>[
           TextSpan(
-              text: value,
-              style: FigmaTextStyles.labelSmall.copyWith(
-                color: FigmaColors.lightBlue,
-                fontWeight: FontWeight.w400,
-              )),
+            text: value,
+            style: const TextStyle(
+              fontWeight: FontWeight.w400,
+            ),
+          ),
         ],
       ),
     );

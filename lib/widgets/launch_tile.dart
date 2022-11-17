@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dami_test_project/models/rocket_launch.dart';
 import 'package:dami_test_project/screens/rocket_datail_screen/rocket_detail_screen.dart';
 import 'package:dami_test_project/styles.dart';
+import 'package:dami_test_project/widgets/attribute_label_text.dart';
 import 'package:flutter/material.dart';
 
 class LaunchTile extends StatelessWidget {
@@ -17,6 +18,7 @@ class LaunchTile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0),
       child: GestureDetector(
+        // Open RocketDetailScreen
         onTap: () {
           Navigator.push(
             context,
@@ -44,90 +46,69 @@ class LaunchTile extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(right: 14.0),
-                      child: launch.imageUrl != null
-                          ? CachedNetworkImage(
-                              width: 57,
-                              height: 57,
-                              imageUrl: launch.imageUrl!,
-                              progressIndicatorBuilder:
-                                  (context, url, downloadProgress) =>
-                                      CircularProgressIndicator(
-                                          value: downloadProgress.progress),
-                              errorWidget: (context, url, error) =>
-                                  const Icon(Icons.error),
-                            )
-                          : Image.asset(
-                              'images/damik/damik.png',
-                              width: 57,
-                              height: 57,
-                            ),
-                    ),
-                  ],
+                // Launch image
+                Padding(
+                  padding: const EdgeInsets.only(right: 14.0),
+                  child: launch.imageUrl != null
+                      ? CachedNetworkImage(
+                          width: 57,
+                          height: 57,
+                          imageUrl: launch.imageUrl!,
+                          progressIndicatorBuilder:
+                              (context, url, downloadProgress) =>
+                                  CircularProgressIndicator(
+                                      value: downloadProgress.progress),
+                          errorWidget: (context, url, error) =>
+                              const Icon(Icons.error),
+                        )
+                      : Image.asset(
+                          'images/damik/damik.png',
+                          width: 57,
+                          height: 57,
+                        ),
                 ),
-                SizedBox(
-                  width: 206,
+
+                // All texts
+                Expanded(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      // Launch name
                       Text(
                         launch.name,
                         softWrap: false,
-                        overflow: TextOverflow.ellipsis,
+                        overflow: TextOverflow.fade,
                         style: FigmaTextStyles.titleLarge,
                       ),
-                      RichText(
-                        text: TextSpan(
-                          text: 'Flight number: ',
-                          style: FigmaTextStyles.labelSmall.copyWith(
-                            fontWeight: FontWeight.w700,
-                            color: FigmaColors.lightBlue,
-                          ),
-                          children: <TextSpan>[
-                            TextSpan(
-                              text: launch.flightNumber.toString(),
-                              style: const TextStyle(
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                          ],
-                        ),
+
+                      // Flight number
+                      AttributeLabelText(
+                        name: 'Flight number: ',
+                        value: launch.flightNumber.toString(),
                       ),
-                      RichText(
-                        text: TextSpan(
-                          text: 'Flight date: ',
-                          style: FigmaTextStyles.labelSmall.copyWith(
-                            fontWeight: FontWeight.w700,
-                            color: FigmaColors.lightBlue,
-                          ),
-                          children: <TextSpan>[
-                            TextSpan(
-                              text: launch.date,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                          ],
-                        ),
+
+                      // Flight date
+                      AttributeLabelText(
+                        name: 'Flight date: ',
+                        value: launch.date,
                       ),
                     ],
                   ),
                 ),
-                Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: const [
-                      Icon(
-                        Icons.chevron_right,
-                        color: FigmaColors.lightBlue,
-                      ),
-                    ],
-                  ),
+
+                const SizedBox(width: 14),
+
+                // Chevron icon
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: const [
+                    Icon(
+                      Icons.chevron_right,
+                      color: FigmaColors.lightBlue,
+                    ),
+                  ],
                 ),
               ],
             ),

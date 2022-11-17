@@ -134,7 +134,8 @@ class RocketDetailScreen extends StatelessWidget {
                       text: 'WIKIPEDIA',
                       onPressed: () async {
                         final Uri url = Uri.parse(state.rocket.wikipediaUrl);
-                        if (!await launchUrl(url)) {
+                        if (!await launchUrl(url,
+                            mode: LaunchMode.externalApplication)) {
                           throw 'Could not launch $url';
                         }
                       },
