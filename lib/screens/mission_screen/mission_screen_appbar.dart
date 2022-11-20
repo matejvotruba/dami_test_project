@@ -15,7 +15,7 @@ class MissionScreenAppBar extends StatelessWidget
     return Container(
       decoration: const BoxDecoration(
         boxShadow: <BoxShadow>[
-          FigmaEffectStyle.boxShadow,
+          FigmaEffectStyles.boxShadow,
         ],
         borderRadius: kAppBarBorderRadius,
       ),

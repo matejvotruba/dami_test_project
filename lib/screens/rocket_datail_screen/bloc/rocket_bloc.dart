@@ -16,6 +16,7 @@ class RocketBloc extends Bloc<RocketEvent, RocketState> {
     RocketFetchDataEvent event,
     Emitter<RocketState> emit,
   ) async {
+    // Loading state
     emit(const RocketLoadingState());
 
     try {
@@ -25,7 +26,7 @@ class RocketBloc extends Bloc<RocketEvent, RocketState> {
       final Map data = response.data;
 
       // Create Rocket object
-      final Rocket rocket = Rocket(
+      final rocket = Rocket(
         name: data['name'],
         description: data['description'],
         type: data['type'],
@@ -37,8 +38,9 @@ class RocketBloc extends Bloc<RocketEvent, RocketState> {
 
       // Show data
       emit(RocketSuccessFetchDataState(rocket: rocket));
-    } catch (e) {
+
       // On error
+    } catch (e) {
       if (kDebugMode) {
         print(e);
       }

@@ -19,7 +19,9 @@ class DamiMaterialButton extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
         color: FigmaColors.damiGrass,
-        boxShadow: const <BoxShadow>[FigmaEffectStyle.boxShadow],
+        boxShadow: const <BoxShadow>[
+          FigmaEffectStyles.boxShadow,
+        ],
       ),
       child: MaterialButton(
         onPressed: onPressed,

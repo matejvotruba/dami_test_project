@@ -21,7 +21,7 @@ class MissionBloc extends Bloc<MissionEvent, MissionState> {
     MissionAppStartEvent event,
     Emitter<MissionState> emit,
   ) async {
-    // SplashScreen duration (1 sec + data fetching)
+    // SplashScreen duration = (1 sec + data fetching)
     await Future.delayed(const Duration(seconds: 1));
     add(const MissionFetchDataEvent());
   }

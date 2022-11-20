@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dami_test_project/models/rocket_launch.dart';
-import 'package:dami_test_project/screens/rocket_datail_screen/rocket_detail_screen.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:dami_test_project/routes/auto_route.gr.dart';
 import 'package:dami_test_project/styles.dart';
 import 'package:dami_test_project/widgets/attribute_label_text.dart';
 import 'package:flutter/material.dart';
@@ -20,11 +21,10 @@ class LaunchTile extends StatelessWidget {
       child: GestureDetector(
         // Open RocketDetailScreen
         onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) =>
-                  RocketDetailScreen(rocketId: launch.rocketId),
+          // AutoRoute push
+          context.pushRoute(
+            RocketDetailScreenRoute(
+              rocketId: launch.rocketId,
             ),
           );
         },
@@ -47,8 +47,7 @@ class LaunchTile extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 // Launch image
-                Padding(
-                  padding: const EdgeInsets.only(right: 14.0),
+                Container(
                   child: launch.imageUrl != null
                       ? CachedNetworkImage(
                           width: 57,
@@ -68,7 +67,9 @@ class LaunchTile extends StatelessWidget {
                         ),
                 ),
 
-                // All texts
+                const SizedBox(width: 14),
+
+                // Name, Flight number, Flight date
                 Expanded(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -100,15 +101,9 @@ class LaunchTile extends StatelessWidget {
                 const SizedBox(width: 14),
 
                 // Chevron icon
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: const [
-                    Icon(
-                      Icons.chevron_right,
-                      color: FigmaColors.lightBlue,
-                    ),
-                  ],
+                const Icon(
+                  Icons.chevron_right,
+                  color: FigmaColors.lightBlue,
                 ),
               ],
             ),

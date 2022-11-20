@@ -1,10 +1,4 @@
 class RocketLaunch {
-  final String name;
-  final String? imageUrl;
-  final int flightNumber;
-  final String date;
-  final String rocketId;
-
   RocketLaunch({
     required this.name,
     required this.imageUrl,
@@ -12,4 +6,10 @@ class RocketLaunch {
     required this.date,
     required this.rocketId,
   });
+
+  final String name;
+  final String? imageUrl;
+  final int flightNumber;
+  final String date;
+  final String rocketId;
 }

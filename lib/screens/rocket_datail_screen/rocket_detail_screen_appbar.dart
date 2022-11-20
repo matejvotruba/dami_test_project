@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:dami_test_project/styles.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +18,7 @@ class RocketDetailScreenAppBar extends StatelessWidget
     return Container(
       decoration: const BoxDecoration(
         boxShadow: <BoxShadow>[
-          FigmaEffectStyle.boxShadow,
+          FigmaEffectStyles.boxShadow,
         ],
         borderRadius: kAppBarBorderRadius,
       ),
@@ -34,7 +35,8 @@ class RocketDetailScreenAppBar extends StatelessWidget
             children: [
               GestureDetector(
                 onTap: () {
-                  Navigator.pop(context);
+                  // AutoRoute pop
+                  context.popRoute();
                 },
                 child: const Icon(
                   Icons.arrow_back,

@@ -7,7 +7,7 @@ abstract class FigmaColors {
   static const lightBlue = Color(0xff9ba5ae);
 }
 
-abstract class FigmaEffectStyle {
+abstract class FigmaEffectStyles {
   static const boxShadow = BoxShadow(
     color: Color.fromRGBO(0, 0, 0, 0.25),
     blurRadius: 4,

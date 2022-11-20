@@ -3,6 +3,7 @@ import 'package:dami_test_project/screens/rocket_datail_screen/rocket_detail_scr
 import 'package:dami_test_project/styles.dart';
 import 'package:dami_test_project/widgets/attribute_label_text.dart';
 import 'package:dami_test_project/widgets/dami_material_button.dart';
+import 'package:dami_test_project/widgets/error_screen_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -14,6 +15,7 @@ class RocketDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // appBarHeight based on the device
     final appBarHeight = 96 - MediaQuery.of(context).padding.top;
 
     return BlocProvider(
@@ -41,33 +43,12 @@ class RocketDetailScreen extends StatelessWidget {
                 appBarHeight: appBarHeight,
                 title: 'Error',
               ),
-              body: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      'DATA DOWNLOAD\n'
-                      'FAILED',
-                      style: FigmaTextStyles.titleLarge.copyWith(
-                        color: FigmaColors.lightBlue,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: 28),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                      child: DamiMaterialButton(
-                        text: 'TRY AGAIN',
-                        onPressed: () {
-                          context
-                              .read<RocketBloc>()
-                              .add(RocketFetchDataEvent(rocketId: rocketId));
-                        },
-                      ),
-                    ),
-                  ],
-                ),
+              body: ErrorScreenBody(
+                onTryAgainPressed: () {
+                  context
+                      .read<RocketBloc>()
+                      .add(RocketFetchDataEvent(rocketId: rocketId));
+                },
               ),
             );
           }
@@ -146,7 +127,12 @@ class RocketDetailScreen extends StatelessWidget {
             );
           }
 
-          return Container();
+          // Should not happen
+          return const Scaffold(
+            body: Center(
+              child: Text('Something went wrong with the Bloc'),
+            ),
+          );
         },
       ),
     );
