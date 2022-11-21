@@ -5,7 +5,6 @@ import 'package:equatable/equatable.dart';
 
 import 'package:dami_test_project/models/rocket_launch.dart';
 import 'package:dio/dio.dart';
-import 'package:intl/intl.dart' show DateFormat;
 
 part 'mission_event.dart';
 part 'mission_state.dart';
@@ -38,9 +37,6 @@ class MissionBloc extends Bloc<MissionEvent, MissionState> {
     MissionFetchDataEvent event,
     Emitter<MissionState> emit,
   ) async {
-    List<RocketLaunch> launches = [];
-    final dateFormatter = DateFormat('d. M. yyyy H:mm');
-
     try {
       // API Call
       final response =
@@ -48,17 +44,9 @@ class MissionBloc extends Bloc<MissionEvent, MissionState> {
       final List data = response.data;
 
       // Create a list of RocketLaunch objects
-      launches = data.map((e) {
-        final dateUtc = DateTime.parse(e['date_utc']);
-        final date = dateFormatter.format(dateUtc);
-        return RocketLaunch(
-          name: e['name'],
-          imageUrl: e['links']['patch']['large'],
-          flightNumber: e['flight_number'] ?? Null,
-          date: date,
-          rocketId: e['rocket'],
-        );
-      }).toList();
+      List<RocketLaunch> launches = [
+        for (var e in data) RocketLaunch.fromJson(e)
+      ];
 
       // Success State
       emit(MissionSuccessFetchDataState(launches: launches));

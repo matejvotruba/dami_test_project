@@ -23,18 +23,10 @@ class RocketBloc extends Bloc<RocketEvent, RocketState> {
       // API Call
       final response = await Dio()
           .get('https://api.spacexdata.com/v4/rockets/${event.rocketId}');
-      final Map data = response.data;
+      final Map<String, dynamic> data = response.data;
 
       // Create Rocket object
-      final rocket = Rocket(
-        name: data['name'],
-        description: data['description'],
-        type: data['type'],
-        stages: data['stages'],
-        company: data['company'],
-        boosters: data['boosters'],
-        wikipediaUrl: data['wikipedia'],
-      );
+      final rocket = Rocket.fromJson(data);
 
       // Show data
       emit(RocketSuccessFetchDataState(rocket: rocket));

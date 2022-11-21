@@ -1,4 +1,12 @@
 class Rocket {
+  final String name;
+  final String description;
+  final String type;
+  final int stages;
+  final String company;
+  final int boosters;
+  final String wikipediaUrl;
+
   const Rocket({
     required this.name,
     required this.description,
@@ -9,11 +17,12 @@ class Rocket {
     required this.wikipediaUrl,
   });
 
-  final String name;
-  final String description;
-  final String type;
-  final int stages;
-  final String company;
-  final int boosters;
-  final String wikipediaUrl;
+  Rocket.fromJson(Map<String, dynamic> json)
+      : name = json['name'],
+        description = json['description'],
+        type = json['type'],
+        stages = json['stages'],
+        company = json['company'],
+        boosters = json['boosters'],
+        wikipediaUrl = json['wikipedia'];
 }
